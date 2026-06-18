@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liquid Glass UI</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #070b16;
+      }
+
+      /* ==========================
+   ANIMATED BACKGROUND
+========================== */
+
+      .bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        animation: hueRotate 25s linear infinite;
+      }
+
+      @keyframes hueRotate {
+        from {
+          filter: hue-rotate(0deg);
+        }
+        to {
+          filter: hue-rotate(360deg);
+        }
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.8;
+        will-change: transform;
+        transform: translateZ(0);
+      }
+
+      .blob1 {
+        width: 550px;
+        height: 550px;
+        background: #5b5bf7;
+        top: -120px;
+        left: -120px;
+        animation: blob1Move 18s infinite alternate ease-in-out;
+      }
+
+      .blob2 {
+        width: 500px;
+        height: 500px;
+        background: #00d4ff;
+        right: -120px;
+        bottom: -120px;
+        animation: blob2Move 22s infinite alternate ease-in-out;
+      }
+
+      .blob3 {
+        width: 400px;
+        height: 400px;
+        background: #ff3ea5;
+        top: 35%;
+        left: 40%;
+        animation: blob3Move 16s infinite alternate ease-in-out;
+      }
+
+      @keyframes blob1Move {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        50% {
+          transform: translate(250px, 150px) scale(1.2);
+        }
+
+        100% {
+          transform: translate(100px, 300px) scale(0.95);
+        }
+      }
+
+      @keyframes blob2Move {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        50% {
+          transform: translate(-250px, -180px) scale(1.15);
+        }
+
+        100% {
+          transform: translate(-120px, -320px) scale(0.9);
+        }
+      }
+
+      @keyframes blob3Move {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        25% {
+          transform: translate(-120px, 100px) scale(1.1);
+        }
+
+        50% {
+          transform: translate(150px, -120px) scale(1.25);
+        }
+
+        75% {
+          transform: translate(-80px, -180px) scale(0.95);
+        }
+
+        100% {
+          transform: translate(100px, 150px) scale(1.1);
+        }
+      }
+
+      /* ==========================
+   LIQUID GLASS CARD
+========================== */
+
+      .glass {
+        position: relative;
+
+        width: 850px;
+        max-width: 90%;
+
+        padding: 55px;
+
+        border-radius: 40px;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        backdrop-filter: blur(35px) saturate(180%);
+
+        -webkit-backdrop-filter: blur(35px) saturate(180%);
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        box-shadow:
+          0 10px 60px rgba(0, 0, 0, 0.35),
+          inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+        overflow: hidden;
+      }
+
+      /* Reflection */
+
+      .glass::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.25),
+          transparent 40%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.08)
+        );
+
+        pointer-events: none;
+      }
+
+      /* Shine */
+
+      .glass::after {
+        content: "";
+
+        position: absolute;
+
+        top: -50%;
+        left: -100%;
+
+        width: 60%;
+        height: 200%;
+
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.18),
+          transparent
+        );
+
+        transform: rotate(20deg);
+
+        animation: shine 6s linear infinite;
+      }
+
+      @keyframes shine {
+        100% {
+          left: 180%;
+        }
+      }
+
+      /* ==========================
+   STATUS BADGE
+========================== */
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        padding: 10px 18px;
+
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        color: white;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        background: #00ff99;
+
+        box-shadow:
+          0 0 15px #00ff99,
+          0 0 30px #00ff99;
+      }
+
+      /* ==========================
+   HEADING
+========================== */
+
+      h1 {
+        margin-top: 30px;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: white;
+      }
+
+      .gradient {
+        background: linear-gradient(90deg, #7dd3fc, #818cf8, #f472b6);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ==========================
+   SIGNATURE
+========================== */
+
+      .signature {
+        margin-top: 26px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+      }
+
+      .signature .text {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .signature .text::before {
+        content: "";
+        width: 90px;
+        height: 1px;
+
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.8)
+        );
+      }
+
+      .signature strong {
+        background: linear-gradient(90deg, #7dd3fc, #818cf8, #f472b6);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ==========================
+   MOBILE
+========================== */
+
+      @media (max-width: 900px) {
+        .glass {
+          padding: 35px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .signature .text::before {
+          width: 50px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+    </div>
+
+    <div class="glass">
+      <div class="badge">
+        <div class="dot"></div>
+        Live Infrastructure
+      </div>
+
+      <h1>
+        <span class="gradient"> Server Running </span>
+      </h1>
+
+      <div class="signature">
+        <span class="text"> Crafted by <strong>Kush Bhardwaj</strong> </span>
+      </div>
+    </div>
+  </body>
+</html>
